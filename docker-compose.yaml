@@ -11,15 +11,15 @@ services:
       - "./nginx.conf:/etc/nginx/nginx.conf"
       - "/etc/letsencrypt:/etc/letsencrypt"
     depends_on:
-      - backend
-      - frontend
+      - pocketbase
+      - solid
     networks:
       - dev
 
-  solid-start:
+  solid:
     build:
       context: .
-      dockerfile: ./dockerfile.front
+      dockerfile: ./dockerfile.solid
     links:
       - pocketbase
     volumes: 
@@ -27,14 +27,13 @@ services:
       - /usr/app/node_modules
     ports:
       - 3000:3000
-      - 4000:4000
     networks:
       - dev
 
   pocketbase:
     build:
       context: .
-      dockerfile: ./dockerfile.back
+      dockerfile: ./dockerfile.pocketbase
     volumes:
       - /path/to/data:/pb_data
     ports:

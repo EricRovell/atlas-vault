@@ -30,3 +30,5 @@ Thumbs.db
 coverage
 tsconfig.tsbuildinfo
 vite.config.ts.timestamp*
+
+/pb_data

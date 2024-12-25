@@ -23,8 +23,7 @@ services:
     links:
       - pocketbase
     volumes: 
-      - ./:/usr/app
-      - /usr/app/node_modules
+      - ./:/root/atlas-vault
     ports:
       - 3000:3000
     networks:
@@ -35,7 +34,7 @@ services:
       context: .
       dockerfile: ./dockerfile.pocketbase
     volumes:
-      - /path/to/data:/pb_data
+      - "./pb_data:/pb/pb_data"
     ports:
       - 8080:8080
     networks:

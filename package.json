@@ -6,20 +6,37 @@
 		"dev": "vinxi dev",
 		"build": "vinxi build",
 		"start": "vinxi start",
-		"version": "vinxi version"
+		"version": "vinxi version",
+		"lint:code": "eslint",
+		"lint:code:fix": "eslint --fix",
+		"lint:styles": "npx stylelint src/**/*.css",
+		"lint:styles:fix": "npx stylelint src/**/*.css --fix",
+		"lint:types": "tsc --noEmit",
+		"lint": "pnpm lint:code && pnpm lint:types && pnpm lint:styles",
+		"test:unit": "vitest run"
 	},
 	"dependencies": {
 		"@solidjs/meta": "^0.29.4",
 		"@solidjs/router": "^0.15.2",
 		"@solidjs/start": "^1.0.10",
-		"@types/leaflet": "^1.9.15",
 		"leaflet": "^1.9.4",
 		"pocketbase": "^0.24.0",
 		"solid-js": "1.9.3",
-		"typescript": "5.7.2",
 		"vinxi": "^0.4.3",
 		"vite": "^5.4.10",
 		"vite-plugin-solid": "2.11.0"
+	},
+	"devDependencies": {
+		"eslint": "^9.17.0",
+		"eslint-plugin-perfectionist": "^4.4.0",
+		"postcss-nesting": "^13.0.1",
+		"stylelint": "^16.12.0",
+		"stylelint-config-standard": "^36.0.1",
+		"typescript": "5.7.2",
+		"typescript-eslint": "^8.18.2",
+		"vite-tsconfig-paths": "^5.1.4",
+		"vitest": "^2.1.8",
+		"@types/leaflet": "^1.9.15"
 	},
 	"engines": {
 		"node": ">=22"

@@ -1,23 +1,20 @@
-// @ts-check
-
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import solid from "eslint-plugin-solid";
 import perfectionist from "eslint-plugin-perfectionist";
 
 export default tseslint.config(
 	{
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-		rules: eslint.configs.recommended.rules
+		rules: {
+			...eslint.configs.recommended.rules
+		}
 	},
 	...tseslint.configs.strictTypeChecked,
 	...tseslint.configs.stylisticTypeChecked,
 	{
 		ignores: [
-			"**/dist/*",
-			"**/node_modules/*",
-			"**/deprecated/*",
-			"**/bundle-dts.js"
+			".output",
+			".vinxi",
+			"node_modules"
 		]
 	},
 	{
@@ -27,32 +24,22 @@ export default tseslint.config(
 				"DateLike": true,
 				"Nullable": true,
 				"Nullish": true,
-				"VoidFn": true,
 				"Undefinable": true
 			},
 			parserOptions: {
 				ecmaFeatures: {
 					jsx: true
 				},
-				project: [
-					"./tsconfig.base.json",
-					"./tsconfig.node.json",
-					"./src/**/tsconfig.json",
-					"./src/**/tsconfig.test.json",
-				],
 				tsconfigRootDir: import.meta.dirname,
-				ecmaVersion: "latest"
+				ecmaVersion: "latest",
+				parserOptions: {
+					projectService: true,
+					tsconfigRootDir: import.meta.dirname,
+				},
+				project: [
+					"./tsconfig.json",
+				],
 			}
-		}
-	},
-	{
-		files: [ "**/*.{ts,tsx}" ],
-		plugins: {
-			"solid": solid.configs["flat/typescript"].plugins.solid
-		},
-		rules: solid.configs["flat/typescript"].rules,
-		languageOptions: {
-			parser: tseslint.parser
 		}
 	},
 	{
@@ -62,18 +49,7 @@ export default tseslint.config(
 			perfectionist: perfectionist
 		},
 		languageOptions: {
-			parser: tseslint.parser,
-			parserOptions: {
-				project: [
-					"./tsconfig.base.json",
-					"./tsconfig.node.json",
-					"./src/**/tsconfig.json",
-					"./src/**/tsconfig.test.json"
-				],
-				/* EXPERIMENTAL_useProjectService: {
-					maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 12,
-				} */
-			},
+			parser: tseslint.parser
 		},
 		rules: {
 			"perfectionist/sort-array-includes": "error",
@@ -98,7 +74,7 @@ export default tseslint.config(
 					],
 					newlinesBetween: "always",
 					internalPattern: [
-						"@lib/**"
+						"^~/.*"
 					]
 				}
 			],
@@ -123,6 +99,7 @@ export default tseslint.config(
 			"@typescript-eslint/no-unused-vars": [
 				"error", { "argsIgnorePattern": "_" }
 			],
+			"@typescript-eslint/consistent-type-definitions": "off",
 			"@typescript-eslint/strict-boolean-expressions": "off",
 			"@typescript-eslint/explicit-module-boundary-types": "off",
 			"@typescript-eslint/no-confusing-void-expression": [ "error", {
@@ -132,6 +109,7 @@ export default tseslint.config(
 			"@typescript-eslint/no-unsafe-return": "off",
 			"@typescript-eslint/restrict-plus-operands": "off",
 			"@typescript-eslint/prefer-for-of": "off",
+			"@typescript-eslint/no-misused-promises": "off",
 			"comma-dangle": ["error", {
 				"arrays": "never",
 				"objects": "never",

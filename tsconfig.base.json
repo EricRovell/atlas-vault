@@ -22,8 +22,6 @@
 		"./vitest.d.ts"
 	],
 	"exclude": [
-		"node_modules/",
-		"./src/deprecated",
-		"**/dist/"
+		"node_modules"
 	]
 }

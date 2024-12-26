@@ -3,7 +3,9 @@
 		"stylelint-config-standard"
 	],
 	"ignoreFiles": [
-		"**/dist/**/*.css"
+		".output",
+		".vinxi",
+		"node_modules"
 	],
 	"plugins": [
 		"@stylistic/stylelint-plugin"
@@ -15,8 +17,7 @@
 		}],
 		"property-no-unknown": [ true, {
 			"ignoreProperties": [
-				"composes",
-				"r"
+				"composes"
 			]
 		}],
 		"@stylistic/indentation": "tab",
